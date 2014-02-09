@@ -11,19 +11,55 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140129181156) do
+ActiveRecord::Schema.define(version: 20140209022927) do
+
+  create_table "cities", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "location_indices", force: true do |t|
+    t.string   "coordinate_a"
+    t.string   "coordinate_b"
+    t.string   "coordinate_c"
+    t.string   "coordinate_d"
+    t.integer  "city_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "restaurants", force: true do |t|
     t.string   "name"
     t.string   "address"
     t.string   "locality"
-    t.string   "city"
     t.string   "cuisines"
     t.float    "rating_editor_overall"
     t.float    "cost_for_two"
     t.boolean  "has_discount"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "city_id"
+    t.float    "latitude"
+    t.float    "longitude"
   end
+
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       limit: 128
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true
+
+  create_table "tags", force: true do |t|
+    t.string "name"
+  end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true
 
 end

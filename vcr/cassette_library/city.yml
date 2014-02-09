@@ -1,0 +1,97 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.zomato.com/v1/cities?format=json
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      X-Zomato-Api-Key:
+      - 7749b19667964b87a3efc739e254ada2
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Server:
+      - nginx/1.2.1
+      Date:
+      - Sun, 09 Feb 2014 12:12:45 GMT
+      Content-Type:
+      - application/json
+      Transfer-Encoding:
+      - chunked
+      Connection:
+      - keep-alive
+      Set-Cookie:
+      - PHPSESSID=o1p9qsnii0hgh0phi75nefm626; path=/; domain=.zomato.com
+      - adref=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/; domain=.zomato.com
+      - fbcity=7; expires=Fri, 08-Aug-2014 12:12:44 GMT; path=/; domain=.zomato.com
+      - fbtrack=a0d1b3d223e3c1755f0817c808cda4df52f770bce0cc26.67265341; expires=Wed,
+        04-Feb-2015 12:12:44 GMT; path=/; domain=.zomato.com
+      - insider=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; path=/; domain=.zomato.com
+      - zl=en; expires=Fri, 08-Aug-2014 12:12:44 GMT; path=/; domain=.zomato.com
+      Expires:
+      - Thu, 19 Nov 1981 08:52:00 GMT
+      Cache-Control:
+      - no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+      Pragma:
+      - no-cache
+      Content-Security-Policy:
+      - default-src 'self' 'unsafe-inline' 'unsafe-eval' *
+      Access-Control-Allow-Origin:
+      - '*'
+      Access-Control-Allow-Headers:
+      - X-Zomato-API-Key
+      Vary:
+      - Accept-Encoding
+      Front-End-Https:
+      - 'on'
+    body:
+      encoding: UTF-8
+      string: '{"cities":[{"city":{"id":11,"name":"Ahmedabad","has_nightlife":0,"latitude":"23.0426620000","longitude":"72.5667290000","has_events":0,"has_cafes":0,"has_takeaway":0,"currency":"Rs.","country_id":1,"country_name":"India","use_miles":0,"show_zones":0,"citibank_discount":0,"cft_ranges":"{\"1\":{\"label\":\"0
+        - 500\",\"min\":0,\"max\":500},\"2\":{\"label\":\"500 - 1000\",\"min\":500,\"max\":1000},\"3\":{\"label\":\"1000
+        - 2000\",\"min\":1000,\"max\":2000},\"4\":{\"label\":\"2000 +\",\"min\":2000,\"max\":500000}}","filter_veg":1,"filter_credit_cards":1,"filter_buffet":1,"filter_happy_hours":0,"filter_wifi":1,"filter_breakfast":1,"filter_bar":0,"filter_no_bar":0,"filter_live_music":0,"filter_has_events":1,"filter_sheesha":0,"filter_outdoor_seating":1,"filter_halal":0,"filter_45_star":1,"filter_open_at":1,"filter_serves_veg":0,"filter_sports_bar":0}},{"city":{"id":4,"name":"Bangalore","has_nightlife":1,"latitude":"12.9716060000","longitude":"77.5943760000","has_events":0,"has_cafes":1,"has_takeaway":0,"currency":"Rs.","country_id":1,"country_name":"India","use_miles":0,"show_zones":0,"citibank_discount":1,"cft_ranges":"{\"1\":{\"label\":\"0
+        - 500\",\"min\":0,\"max\":500},\"2\":{\"label\":\"500 - 1000\",\"min\":500,\"max\":1000},\"3\":{\"label\":\"1000
+        - 2000\",\"min\":1000,\"max\":2000},\"4\":{\"label\":\"2000 +\",\"min\":2000,\"max\":500000}}","filter_veg":1,"filter_credit_cards":1,"filter_buffet":1,"filter_happy_hours":1,"filter_wifi":1,"filter_breakfast":1,"filter_bar":1,"filter_no_bar":1,"filter_live_music":0,"filter_has_events":1,"filter_sheesha":0,"filter_outdoor_seating":1,"filter_halal":0,"filter_45_star":1,"filter_open_at":1,"filter_serves_veg":0,"filter_sports_bar":0}},{"city":{"id":12,"name":"Chandigarh","has_nightlife":1,"latitude":"30.7377930000","longitude":"76.7751500000","has_events":0,"has_cafes":1,"has_takeaway":0,"currency":"Rs.","country_id":1,"country_name":"India","use_miles":0,"show_zones":0,"citibank_discount":0,"cft_ranges":"{\"1\":{\"label\":\"0
+        - 500\",\"min\":0,\"max\":500},\"2\":{\"label\":\"500 - 1000\",\"min\":500,\"max\":1000},\"3\":{\"label\":\"1000
+        - 2000\",\"min\":1000,\"max\":2000},\"4\":{\"label\":\"2000 +\",\"min\":2000,\"max\":500000}}","filter_veg":1,"filter_credit_cards":1,"filter_buffet":1,"filter_happy_hours":1,"filter_wifi":1,"filter_breakfast":1,"filter_bar":1,"filter_no_bar":1,"filter_live_music":0,"filter_has_events":1,"filter_sheesha":0,"filter_outdoor_seating":1,"filter_halal":0,"filter_45_star":1,"filter_open_at":1,"filter_serves_veg":0,"filter_sports_bar":0}},{"city":{"id":7,"name":"Chennai","has_nightlife":1,"latitude":"13.0838890000","longitude":"80.2700000000","has_events":0,"has_cafes":1,"has_takeaway":0,"currency":"Rs.","country_id":1,"country_name":"India","use_miles":0,"show_zones":0,"citibank_discount":1,"cft_ranges":"{\"1\":{\"label\":\"0
+        - 500\",\"min\":0,\"max\":500},\"2\":{\"label\":\"500 - 1000\",\"min\":500,\"max\":1000},\"3\":{\"label\":\"1000
+        - 2000\",\"min\":1000,\"max\":2000},\"4\":{\"label\":\"2000 +\",\"min\":2000,\"max\":500000}}","filter_veg":1,"filter_credit_cards":1,"filter_buffet":1,"filter_happy_hours":1,"filter_wifi":1,"filter_breakfast":1,"filter_bar":1,"filter_no_bar":1,"filter_live_music":0,"filter_has_events":1,"filter_sheesha":0,"filter_outdoor_seating":1,"filter_halal":0,"filter_45_star":1,"filter_open_at":1,"filter_serves_veg":0,"filter_sports_bar":0}},{"city":{"id":1,"name":"Delhi
+        NCR","has_nightlife":1,"latitude":"28.6257890000","longitude":"77.2102760000","has_events":0,"has_cafes":1,"has_takeaway":0,"currency":"Rs.","country_id":1,"country_name":"India","use_miles":0,"show_zones":1,"citibank_discount":1,"cft_ranges":"{\"1\":{\"label\":\"0
+        - 500\",\"min\":0,\"max\":500},\"2\":{\"label\":\"500 - 1000\",\"min\":500,\"max\":1000},\"3\":{\"label\":\"1000
+        - 2000\",\"min\":1000,\"max\":2000},\"4\":{\"label\":\"2000 +\",\"min\":2000,\"max\":500000}}","filter_veg":1,"filter_credit_cards":1,"filter_buffet":1,"filter_happy_hours":1,"filter_wifi":1,"filter_breakfast":1,"filter_bar":1,"filter_no_bar":1,"filter_live_music":0,"filter_has_events":1,"filter_sheesha":0,"filter_outdoor_seating":1,"filter_halal":0,"filter_45_star":1,"filter_open_at":1,"filter_serves_veg":0,"filter_sports_bar":0}},{"city":{"id":21,"name":"Guwahati","has_nightlife":0,"latitude":"26.1460000000","longitude":"91.7360000000","has_events":0,"has_cafes":0,"has_takeaway":0,"currency":"Rs.","country_id":1,"country_name":"India","use_miles":0,"show_zones":0,"citibank_discount":0,"cft_ranges":"{\"1\":{\"label\":\"0
+        - 500\",\"min\":0,\"max\":500},\"2\":{\"label\":\"500 - 1000\",\"min\":500,\"max\":1000},\"3\":{\"label\":\"1000
+        - 2000\",\"min\":1000,\"max\":2000},\"4\":{\"label\":\"2000 +\",\"min\":2000,\"max\":500000}}","filter_veg":1,"filter_credit_cards":1,"filter_buffet":0,"filter_happy_hours":0,"filter_wifi":1,"filter_breakfast":1,"filter_bar":1,"filter_no_bar":1,"filter_live_music":0,"filter_has_events":0,"filter_sheesha":0,"filter_outdoor_seating":1,"filter_halal":0,"filter_45_star":0,"filter_open_at":1,"filter_serves_veg":0,"filter_sports_bar":0}},{"city":{"id":6,"name":"Hyderabad","has_nightlife":1,"latitude":"17.3660000000","longitude":"78.4760000000","has_events":0,"has_cafes":1,"has_takeaway":0,"currency":"Rs.","country_id":1,"country_name":"India","use_miles":0,"show_zones":0,"citibank_discount":1,"cft_ranges":"{\"1\":{\"label\":\"0
+        - 500\",\"min\":0,\"max\":500},\"2\":{\"label\":\"500 - 1000\",\"min\":500,\"max\":1000},\"3\":{\"label\":\"1000
+        - 2000\",\"min\":1000,\"max\":2000},\"4\":{\"label\":\"2000 +\",\"min\":2000,\"max\":500000}}","filter_veg":1,"filter_credit_cards":1,"filter_buffet":1,"filter_happy_hours":1,"filter_wifi":1,"filter_breakfast":1,"filter_bar":1,"filter_no_bar":1,"filter_live_music":0,"filter_has_events":1,"filter_sheesha":0,"filter_outdoor_seating":1,"filter_halal":1,"filter_45_star":1,"filter_open_at":1,"filter_serves_veg":0,"filter_sports_bar":0}},{"city":{"id":14,"name":"Indore","has_nightlife":0,"latitude":"22.7252000000","longitude":"75.8570000000","has_events":0,"has_cafes":0,"has_takeaway":0,"currency":"Rs.","country_id":1,"country_name":"India","use_miles":0,"show_zones":0,"citibank_discount":0,"cft_ranges":"{\"1\":{\"label\":\"0
+        - 500\",\"min\":0,\"max\":500},\"2\":{\"label\":\"500 - 1000\",\"min\":500,\"max\":1000},\"3\":{\"label\":\"1000
+        - 2000\",\"min\":1000,\"max\":2000},\"4\":{\"label\":\"2000 +\",\"min\":2000,\"max\":500000}}","filter_veg":1,"filter_credit_cards":1,"filter_buffet":1,"filter_happy_hours":1,"filter_wifi":1,"filter_breakfast":1,"filter_bar":1,"filter_no_bar":1,"filter_live_music":0,"filter_has_events":1,"filter_sheesha":0,"filter_outdoor_seating":1,"filter_halal":0,"filter_45_star":0,"filter_open_at":1,"filter_serves_veg":0,"filter_sports_bar":0}},{"city":{"id":10,"name":"Jaipur","has_nightlife":0,"latitude":"26.9160870000","longitude":"75.8096950000","has_events":0,"has_cafes":1,"has_takeaway":0,"currency":"Rs.","country_id":1,"country_name":"India","use_miles":0,"show_zones":0,"citibank_discount":1,"cft_ranges":"{\"1\":{\"label\":\"0
+        - 500\",\"min\":0,\"max\":500},\"2\":{\"label\":\"500 - 1000\",\"min\":500,\"max\":1000},\"3\":{\"label\":\"1000
+        - 2000\",\"min\":1000,\"max\":2000},\"4\":{\"label\":\"2000 +\",\"min\":2000,\"max\":500000}}","filter_veg":1,"filter_credit_cards":1,"filter_buffet":1,"filter_happy_hours":1,"filter_wifi":1,"filter_breakfast":1,"filter_bar":1,"filter_no_bar":1,"filter_live_music":0,"filter_has_events":1,"filter_sheesha":0,"filter_outdoor_seating":1,"filter_halal":0,"filter_45_star":1,"filter_open_at":1,"filter_serves_veg":0,"filter_sports_bar":0}},{"city":{"id":2,"name":"Kolkata","has_nightlife":1,"latitude":"22.5726460000","longitude":"88.3638950000","has_events":0,"has_cafes":1,"has_takeaway":0,"currency":"Rs.","country_id":1,"country_name":"India","use_miles":0,"show_zones":0,"citibank_discount":1,"cft_ranges":"{\"1\":{\"label\":\"0
+        - 500\",\"min\":0,\"max\":500},\"2\":{\"label\":\"500 - 1000\",\"min\":500,\"max\":1000},\"3\":{\"label\":\"1000
+        - 2000\",\"min\":1000,\"max\":2000},\"4\":{\"label\":\"2000 +\",\"min\":2000,\"max\":500000}}","filter_veg":1,"filter_credit_cards":1,"filter_buffet":1,"filter_happy_hours":1,"filter_wifi":1,"filter_breakfast":1,"filter_bar":1,"filter_no_bar":1,"filter_live_music":0,"filter_has_events":1,"filter_sheesha":0,"filter_outdoor_seating":1,"filter_halal":0,"filter_45_star":1,"filter_open_at":1,"filter_serves_veg":0,"filter_sports_bar":0}},{"city":{"id":8,"name":"Lucknow","has_nightlife":0,"latitude":"26.8640000000","longitude":"80.9500000000","has_events":0,"has_cafes":0,"has_takeaway":0,"currency":"Rs.","country_id":1,"country_name":"India","use_miles":0,"show_zones":0,"citibank_discount":0,"cft_ranges":"{\"1\":{\"label\":\"0
+        - 500\",\"min\":0,\"max\":500},\"2\":{\"label\":\"500 - 1000\",\"min\":500,\"max\":1000},\"3\":{\"label\":\"1000
+        - 2000\",\"min\":1000,\"max\":2000},\"4\":{\"label\":\"2000 +\",\"min\":2000,\"max\":500000}}","filter_veg":1,"filter_credit_cards":1,"filter_buffet":1,"filter_happy_hours":1,"filter_wifi":1,"filter_breakfast":1,"filter_bar":1,"filter_no_bar":1,"filter_live_music":0,"filter_has_events":1,"filter_sheesha":0,"filter_outdoor_seating":1,"filter_halal":0,"filter_45_star":0,"filter_open_at":1,"filter_serves_veg":0,"filter_sports_bar":0}},{"city":{"id":20,"name":"Ludhiana","has_nightlife":0,"latitude":"30.9145970000","longitude":"75.8499240000","has_events":0,"has_cafes":0,"has_takeaway":0,"currency":"Rs.","country_id":1,"country_name":"India","use_miles":0,"show_zones":0,"citibank_discount":0,"cft_ranges":"{\"1\":{\"label\":\"0
+        - 500\",\"min\":0,\"max\":500},\"2\":{\"label\":\"500 - 1000\",\"min\":500,\"max\":1000},\"3\":{\"label\":\"1000
+        - 2000\",\"min\":1000,\"max\":2000},\"4\":{\"label\":\"2000 +\",\"min\":2000,\"max\":500000}}","filter_veg":1,"filter_credit_cards":1,"filter_buffet":1,"filter_happy_hours":1,"filter_wifi":1,"filter_breakfast":1,"filter_bar":1,"filter_no_bar":1,"filter_live_music":0,"filter_has_events":1,"filter_sheesha":0,"filter_outdoor_seating":1,"filter_halal":0,"filter_45_star":0,"filter_open_at":1,"filter_serves_veg":0,"filter_sports_bar":0}},{"city":{"id":3,"name":"Mumbai","has_nightlife":1,"latitude":"19.0176560000","longitude":"72.8561780000","has_events":0,"has_cafes":1,"has_takeaway":0,"currency":"Rs.","country_id":1,"country_name":"India","use_miles":0,"show_zones":0,"citibank_discount":1,"cft_ranges":"{\"1\":{\"label\":\"0
+        - 500\",\"min\":0,\"max\":500},\"2\":{\"label\":\"500 - 1000\",\"min\":500,\"max\":1000},\"3\":{\"label\":\"1000
+        - 2000\",\"min\":1000,\"max\":2000},\"4\":{\"label\":\"2000 +\",\"min\":2000,\"max\":500000}}","filter_veg":1,"filter_credit_cards":1,"filter_buffet":1,"filter_happy_hours":1,"filter_wifi":1,"filter_breakfast":1,"filter_bar":1,"filter_no_bar":1,"filter_live_music":0,"filter_has_events":1,"filter_sheesha":0,"filter_outdoor_seating":1,"filter_halal":0,"filter_45_star":1,"filter_open_at":1,"filter_serves_veg":0,"filter_sports_bar":0}},{"city":{"id":5,"name":"Pune","has_nightlife":1,"latitude":"18.5204690000","longitude":"73.8566200000","has_events":0,"has_cafes":1,"has_takeaway":0,"currency":"Rs.","country_id":1,"country_name":"India","use_miles":0,"show_zones":0,"citibank_discount":1,"cft_ranges":"{\"1\":{\"label\":\"0
+        - 500\",\"min\":0,\"max\":500},\"2\":{\"label\":\"500 - 1000\",\"min\":500,\"max\":1000},\"3\":{\"label\":\"1000
+        - 2000\",\"min\":1000,\"max\":2000},\"4\":{\"label\":\"2000 +\",\"min\":2000,\"max\":500000}}","filter_veg":1,"filter_credit_cards":1,"filter_buffet":1,"filter_happy_hours":1,"filter_wifi":1,"filter_breakfast":1,"filter_bar":1,"filter_no_bar":1,"filter_live_music":0,"filter_has_events":1,"filter_sheesha":0,"filter_outdoor_seating":1,"filter_halal":0,"filter_45_star":1,"filter_open_at":1,"filter_serves_veg":0,"filter_sports_bar":0}},{"city":{"id":62,"name":"Doha","has_nightlife":0,"latitude":"25.2950000000","longitude":"51.5200000000","has_events":0,"has_cafes":0,"has_takeaway":0,"currency":"QR","country_id":166,"country_name":"Qatar","use_miles":0,"show_zones":0,"citibank_discount":0,"cft_ranges":"{\"1\":{\"label\":\"0
+        - 30\",\"min\":0,\"max\":30},\"2\":{\"label\":\"30 - 60\",\"min\":30,\"max\":60},\"3\":{\"label\":\"60
+        - 120\",\"min\":60,\"max\":120},\"4\":{\"label\":\"120 +\",\"min\":120,\"max\":50000}}","filter_veg":1,"filter_credit_cards":1,"filter_buffet":0,"filter_happy_hours":0,"filter_wifi":1,"filter_breakfast":1,"filter_bar":1,"filter_no_bar":1,"filter_live_music":0,"filter_has_events":0,"filter_sheesha":0,"filter_outdoor_seating":1,"filter_halal":0,"filter_45_star":1,"filter_open_at":1,"filter_serves_veg":0,"filter_sports_bar":0}},{"city":{"id":58,"name":"Colombo","has_nightlife":0,"latitude":"6.9350000000","longitude":"79.8610000000","has_events":0,"has_cafes":0,"has_takeaway":0,"currency":"Rs.","country_id":191,"country_name":"Sri
+        Lanka","use_miles":0,"show_zones":0,"citibank_discount":0,"cft_ranges":"{\"1\":{\"label\":\"0
+        - 1000\",\"min\":0,\"max\":1000},\"2\":{\"label\":\"1000 - 2000\",\"min\":1000,\"max\":2000},\"3\":{\"label\":\"2000
+        - 4000\",\"min\":2000,\"max\":4000},\"4\":{\"label\":\"4000 +\",\"min\":4000,\"max\":500000}}","filter_veg":1,"filter_credit_cards":1,"filter_buffet":1,"filter_happy_hours":1,"filter_wifi":1,"filter_breakfast":1,"filter_bar":1,"filter_no_bar":1,"filter_live_music":0,"filter_has_events":0,"filter_sheesha":0,"filter_outdoor_seating":1,"filter_halal":0,"filter_45_star":1,"filter_open_at":1,"filter_serves_veg":0,"filter_sports_bar":0}},{"city":{"id":57,"name":"Abu
+        Dhabi","has_nightlife":1,"latitude":"24.4041530000","longitude":"54.5003340000","has_events":0,"has_cafes":0,"has_takeaway":0,"currency":"Dhs.","country_id":214,"country_name":"UAE","use_miles":0,"show_zones":0,"citibank_discount":0,"cft_ranges":"{\"1\":{\"label\":\"0
+        - 40\",\"min\":0,\"max\":40},\"2\":{\"label\":\"40 - 60\",\"min\":40,\"max\":60},\"3\":{\"label\":\"60
+        - 100\",\"min\":60,\"max\":100},\"4\":{\"label\":\"100 +\",\"min\":100,\"max\":500000}}","filter_veg":1,"filter_credit_cards":1,"filter_buffet":1,"filter_happy_hours":1,"filter_wifi":1,"filter_breakfast":1,"filter_bar":1,"filter_no_bar":1,"filter_live_music":0,"filter_has_events":1,"filter_sheesha":1,"filter_outdoor_seating":1,"filter_halal":0,"filter_45_star":1,"filter_open_at":1,"filter_serves_veg":0,"filter_sports_bar":0}},{"city":{"id":51,"name":"Dubai","has_nightlife":1,"latitude":"25.2586690000","longitude":"55.3182220000","has_events":0,"has_cafes":0,"has_takeaway":0,"currency":"Dhs.","country_id":214,"country_name":"UAE","use_miles":0,"show_zones":1,"citibank_discount":0,"cft_ranges":"{\"1\":{\"label\":\"0
+        - 50\",\"min\":0,\"max\":50},\"2\":{\"label\":\"50 - 100\",\"min\":50,\"max\":100},\"3\":{\"label\":\"100
+        - 300\",\"min\":100,\"max\":300},\"4\":{\"label\":\"300 +\",\"min\":300,\"max\":500000}}","filter_veg":1,"filter_credit_cards":1,"filter_buffet":1,"filter_happy_hours":1,"filter_wifi":1,"filter_breakfast":1,"filter_bar":1,"filter_no_bar":1,"filter_live_music":0,"filter_has_events":0,"filter_sheesha":1,"filter_outdoor_seating":1,"filter_halal":0,"filter_45_star":1,"filter_open_at":1,"filter_serves_veg":0,"filter_sports_bar":1}},{"city":{"id":56,"name":"Sharjah","has_nightlife":0,"latitude":"25.3740000000","longitude":"55.3900000000","has_events":0,"has_cafes":0,"has_takeaway":0,"currency":"Dhs.","country_id":214,"country_name":"UAE","use_miles":0,"show_zones":0,"citibank_discount":0,"cft_ranges":"{\"1\":{\"label\":\"0
+        - 40\",\"min\":0,\"max\":40},\"2\":{\"label\":\"40 - 60\",\"min\":40,\"max\":60},\"3\":{\"label\":\"60
+        - 100\",\"min\":60,\"max\":100},\"4\":{\"label\":\"100 +\",\"min\":100,\"max\":500000}}","filter_veg":1,"filter_credit_cards":1,"filter_buffet":1,"filter_happy_hours":0,"filter_wifi":1,"filter_breakfast":1,"filter_bar":0,"filter_no_bar":0,"filter_live_music":0,"filter_has_events":1,"filter_sheesha":0,"filter_outdoor_seating":1,"filter_halal":0,"filter_45_star":1,"filter_open_at":1,"filter_serves_veg":0,"filter_sports_bar":0}}]}'
+    http_version: 
+  recorded_at: Sun, 09 Feb 2014 12:12:45 GMT
+recorded_with: VCR 2.4.0
