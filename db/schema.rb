@@ -11,29 +11,44 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140209022927) do
+ActiveRecord::Schema.define(version: 20140301130042) do
 
   create_table "cities", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "bounds"
   end
 
+  create_table "location_index_restaurants", force: true do |t|
+    t.integer  "restaurant_id"
+    t.integer  "location_index_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "location_index_restaurants", ["location_index_id"], name: "index_location_index_restaurants_on_location_index_id"
+  add_index "location_index_restaurants", ["restaurant_id"], name: "index_location_index_restaurants_on_restaurant_id"
+
   create_table "location_indices", force: true do |t|
-    t.string   "coordinate_a"
-    t.string   "coordinate_b"
-    t.string   "coordinate_c"
-    t.string   "coordinate_d"
     t.integer  "city_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "restaurant_count"
+    t.float    "latitude_a"
+    t.float    "latitude_b"
+    t.float    "latitude_c"
+    t.float    "latitude_d"
+    t.float    "longitude_a"
+    t.float    "longitude_b"
+    t.float    "longitude_c"
+    t.float    "longitude_d"
   end
 
   create_table "restaurants", force: true do |t|
     t.string   "name"
     t.string   "address"
     t.string   "locality"
-    t.string   "cuisines"
     t.float    "rating_editor_overall"
     t.float    "cost_for_two"
     t.boolean  "has_discount"

@@ -1,7 +1,10 @@
 class Restaurant < ActiveRecord::Base
 
-	#Assosiations
+	#Associations
 	belongs_to :city
+
+	has_one :location_index_restaurant
+	has_one :location_index, :through => :location_index_restaurant
 
 	#Tags
   acts_as_taggable
@@ -55,8 +58,31 @@ class Restaurant < ActiveRecord::Base
 		super(distance_in_kms / Constant.miles_per_kilo_meter)
 	end
 
+	#Returns the latitude and longitude as a comma seperated string
 	def coordinates
-	latitude.to_s + "," + longitude.to_s
+	 coordinate_array.map(&:to_s).join(",")
+	end
+
+	def coordinates=(new_coordinates)
+		self.latitude = new_coordinates.split(",").first.to_f
+		self.longitude = new_coordinates.split(",").last.to_f
+	end
+
+	#Retuns the latitude and longitude as an array
+	def coordinate_array
+		[latitude,longitude] if latitude.present? && longitude.present?
+	end
+
+	def geocode
+		super
+		unless city.contains? latitude,longitude
+			coordinates = [nil,nil]
+		end
+	end
+
+	private
+	def name_locality_city_string
+		name+" "+locality+" "+city.name
 	end
 	
 end

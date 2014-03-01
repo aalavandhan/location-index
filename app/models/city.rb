@@ -3,5 +3,34 @@ class City < ActiveRecord::Base
 	#Assosiations
 	has_many :restaurants
 	has_many :location_indices
+	
+	def max_latitude
+		bound_by.map(&:first).max
+	end
+
+	def min_latitude
+		bound_by.map(&:first).min
+	end
+
+	def max_longitude
+		bound_by.map(&:last).max
+	end
+
+	def min_longitude
+		bound_by.map(&:last).min
+	end
+
+	def bound_by
+		split_pair = -> pair {
+			pair.split(":")
+					.map(&:to_f)
+		}
+		bounds.split(",").map(&split_pair)
+	end
+
+	def contains? latitude, longitude
+		latitude.between?(bound_by.map(&:first).first,bound_by.map(&:first).last) and
+				longitude.between?(bound_by.map(&:last).first,bound_by.map(&:last).last)
+	end
 
 end

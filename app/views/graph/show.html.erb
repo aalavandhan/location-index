@@ -1,0 +1,19 @@
+<div class="row">
+	<center>
+		<table class="graph-table">
+			<% @dimensions.first.times do |nth_latitude|  %>
+			<tr>
+				<% @dimensions.last.times do |nth_longitude|  %>
+					<% zone_id = nth_latitude * @dimensions.last + nth_longitude %>
+					<% count = @indices[zone_id] %>
+					<td class="<%= (count == 0) ? '' : 'present' %>">
+						<% if count != 0 %>
+							<%= link_to count , city_detail_graph_show_path(@city.name,zone_id) %>
+						<% end %>
+					</td>
+				<% end %>
+			</tr>
+			<% end %>
+		</table>
+	</center>
+</div>

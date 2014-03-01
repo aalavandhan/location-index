@@ -2,8 +2,22 @@ require 'spec_helper'
 describe LocationIndex do
 
 	before(:all){
-		@location_index =  LocationIndex.create( coordinate_a: "13.0308689,80.254694", coordinate_b: "13.0308689,81.254694", coordinate_c: "14.0308689,80.254694", coordinate_d: "14.0308689,81.254694")
+		@location_index =  LocationIndex.create( 
+			latitude_a:  13.0308689,
+			longitude_a: 80.254694,
+			latitude_b:  13.0308689,
+			longitude_b: 81.254694,
+			latitude_c:  14.0308689,
+			longitude_c: 80.254694,
+			latitude_d:  14.0308689,
+			longitude_d: 81.254694
+		)
 	}
+
+	context "assosiations" do
+		it { should belong_to(:city) }
+		it { should have_many(:restaurants).through(:location_index_restaurants) }
+	end
 
 	context "class_methods" do
 		context "private" do
@@ -28,13 +42,13 @@ describe LocationIndex do
 
 			context "next_latitude" do
 				it "should return the next_latitude in the latitude_range" do
-					LocationIndex.instance_eval{ next_latitude(13.0308689) }.should eq(13.3058689)
+					LocationIndex.instance_eval{ next_latitude(13.0308689) }.should eq(13.0508689)
 				end
 			end
 
 			context "next_longitude" do
 				it "should return the next_longitude in the longitude_range" do
-					LocationIndex.instance_eval{ next_longitude(80.254694) }.should eq(80.339694)
+					LocationIndex.instance_eval{ next_longitude(80.254694) }.should eq(80.274694)
 				end
 			end
 
@@ -43,21 +57,15 @@ describe LocationIndex do
 
 	context "instance_methods" do
 
+		context "contains?" do
+			it "should check if a coordinate lies within the zone marked by the four coordinates" do
+				@location_index.contains?(@location_index.center).should eq(true)
+			end
+		end
+
 		context "center" do
 			it "should return the geographic center of the two coordinates" do
 				@location_index.center.should eq([13.5313651885272, 80.754694])
-			end
-		end
-
-		context "latitude" do
-			it "should take in a coordinate and return its latitude" do
-				@location_index.latitude(:a).should eq(13.0308689)
-			end
-		end
-
-		context "longitude" do
-			it "should take in a coordinate and return its longitude" do
-				@location_index.longitude(:a).should eq(80.254694)
 			end
 		end
 
@@ -72,5 +80,19 @@ describe LocationIndex do
 			end
 		end
 
+		context "private_methods" do
+			context "start_point" do
+				it "should return the start_point point of the zone marked by the four coordinates" do
+					@location_index.instance_eval{ start_point }.should eq([13.0308689, 80.254694])
+				end
+			end
+
+			context "end_point" do
+				it "should return the end_point point of the zone marked by the four coordinates" do
+					@location_index.instance_eval{ end_point }.should eq([14.0308689, 81.254694])
+				end
+			end
+		end
 	end
+
 end

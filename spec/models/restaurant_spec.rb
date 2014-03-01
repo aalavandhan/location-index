@@ -3,6 +3,7 @@ describe Restaurant do
 
 	context "Associations" do
 		it { should belong_to(:city) }
+		it { should have_one(:location_index).through(:location_index_restaurant) }
 	end
 
 	context "Instance methods" do
@@ -20,6 +21,11 @@ describe Restaurant do
 				:city_id => @city.id
 			)
 		}
+		context "coordinate_array" do
+			it "should return a coordinate array of latitude and longitude" do
+				@restaurant.coordinate_array.should eq([13.0308689,80.254694])
+			end
+		end
 		context "coordinates" do
 			it "should return a coordinate string" do
 				@restaurant.coordinates.should eq("13.0308689,80.254694")

@@ -20,6 +20,7 @@ group :test do
 	gem 'shoulda-matchers'
 	gem 'vcr', '2.4.0'
 	gem 'webmock', '1.9.1'
+	gem 'factory_girl_rails'
 end
 
 group :doc do
