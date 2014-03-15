@@ -70,19 +70,14 @@ class Restaurant < ActiveRecord::Base
 
 	#Retuns the latitude and longitude as an array
 	def coordinate_array
-		[latitude,longitude] if latitude.present? && longitude.present?
+		[latitude,longitude]
 	end
 
 	def geocode
 		super
-		unless city.contains? latitude,longitude
-			coordinates = [nil,nil]
-		end
-	end
-
-	private
-	def name_locality_city_string
-		name+" "+locality+" "+city.name
+		latitude  ||= nil
+		longitude ||= nil
+		coordinates = "nil,nil" unless city.contains?(latitude,longitude)
 	end
 	
 end

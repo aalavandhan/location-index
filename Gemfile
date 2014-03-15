@@ -16,11 +16,14 @@ group :assets do
 end
 
 group :test do
+	gem 'factory_girl_rails'
 	gem 'rspec-rails', '2.13.1'
 	gem 'shoulda-matchers'
 	gem 'vcr', '2.4.0'
 	gem 'webmock', '1.9.1'
 	gem 'factory_girl_rails'
+  gem 'database_cleaner', '1.0.1'
+  gem "spork-rails"
 end
 
 group :doc do

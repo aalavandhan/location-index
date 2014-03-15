@@ -1,6 +1,6 @@
 require 'spec_helper'
 describe City do 
-	let(:city){ City.create(:name => "Chennai", :bounds => "12.806260:80.084037,13.1686612:80.3007453" )}
+	let(:city){ FactoryGirl.create(:city, :bounds => "12.806260:80.084037,13.1686612:80.3007453" )}
 	context "Associations" do
 		it { should have_many(:restaurants) }
 	end

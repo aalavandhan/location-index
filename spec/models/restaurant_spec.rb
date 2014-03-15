@@ -30,6 +30,11 @@ describe Restaurant do
 			it "should return a coordinate string" do
 				@restaurant.coordinates.should eq("13.0308689,80.254694")
 			end
+			it "should set latitude and longitude based on a coordinate string" do
+				@restaurant.coordinates = "13.0308680,80.254693"
+				@restaurant.latitude.should eq(13.0308680)
+				@restaurant.longitude.should eq(80.254693)
+			end
 		end
 	end
 

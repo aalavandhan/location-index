@@ -51,13 +51,12 @@ class LocationIndex < ActiveRecord::Base
   	city.location_indices.map(&:location_index_restaurants).flatten.map(&:delete)
 
   	city.restaurants.each do |restaurant|
-  		index = locate(restaurant.coordinate_array)
+  		index = locate(restaurant.coordinate_array,city.id)
 			LocationIndexRestaurant.create(
 					location_index_id: index.id,
 					restaurant_id: restaurant.id
 			) if index and restaurant.coordinate_array.present?
 		end
-
 	end
 
 	#Creates latitude and longitude zones for particular city
@@ -100,11 +99,11 @@ class LocationIndex < ActiveRecord::Base
 		restaurants_in_city = Restaurant.where(city_id: city.id).where.not(latitude: 0, longitude: 0)
 
 		#Find the maximum and minimum latitude and longitude points
-		#amoung all restaurants in the city
-		maximum_latitude = restaurants_in_city.maximum(:latitude)
-		minimum_latitude = restaurants_in_city.minimum(:latitude)
-		maximum_longitude = restaurants_in_city.maximum(:longitude)
-		minimum_longitude = restaurants_in_city.minimum(:longitude)
+		#based on city's bounds
+		maximum_latitude = city.max_latitude
+		minimum_latitude = city.min_latitude
+		maximum_longitude = city.max_longitude
+		minimum_longitude = city.min_longitude
 
 		#Finds the maximum and minimum latitude and longitude points
 		#with a predefined buffer
@@ -121,12 +120,17 @@ class LocationIndex < ActiveRecord::Base
 		[range_of_latitudes,range_of_longitudes]
 	end
 
-	def self.locate(coordinates)
-  	where(
-  		"( latitude_d >= #{coordinates.first} and latitude_a <= #{coordinates.first} ) and " +
-  		"( longitude_c >= #{coordinates.last} and longitude_b <= #{coordinates.last} )"
-		)
-			.first
+	def self.locate(coordinates,city_id=nil)
+
+		return nil if coordinates.nil? or coordinates.any?(&:nil?)
+
+		query = "( latitude_d >= #{coordinates.first} and latitude_a <= #{coordinates.first} ) and " +
+  					"( longitude_c >= #{coordinates.last} and longitude_b <= #{coordinates.last} ) "
+  					
+		query +=" and city_id = "+city_id.to_s if city_id.present?
+
+  	where(query).first
+
   end
 
   def self.initialize_query
@@ -140,7 +144,7 @@ class LocationIndex < ActiveRecord::Base
 
 	def self.fastest_nearest_search(coordinates,tags=nil,type=:complete,property=:rating_editor_overall,order=:desc,limit=10)
 		initialize_query
-		index = locate coordinates
+		index = locate(coordinates)
 		@query = index.restaurants_in_zone(@query,tags,limit)
 		@query = index.restaurants_in_near_by_zones(@query,tags,limit)
 		return @query if ( type == :instant || @query[:restaurants].count > limit )
@@ -175,26 +179,28 @@ class LocationIndex < ActiveRecord::Base
 
   #Returns the adjacent zones to a location index object
   def near_by
-  	self.class.where(
-			"( latitude_a = #{latitude_b} and longitude_a = #{longitude_b} ) or " +
-			"( latitude_a = #{latitude_c} and longitude_a = #{longitude_c} ) or " +
-			"( latitude_a = #{latitude_d} and longitude_a = #{longitude_d} ) or " +
-			"( latitude_b = #{latitude_a} and longitude_b = #{longitude_a} ) or " +
-			"( latitude_b = #{latitude_c} and longitude_b = #{longitude_c} ) or " +
-			"( latitude_b = #{latitude_d} and longitude_b = #{longitude_d} ) or " +
-			"( latitude_c = #{latitude_a} and longitude_c = #{longitude_a} ) or " +
-			"( latitude_c = #{latitude_b} and longitude_c = #{longitude_b} ) or " +
-			"( latitude_c = #{latitude_d} and longitude_c = #{longitude_d} ) or " +
-			"( latitude_d = #{latitude_a} and longitude_d = #{longitude_a} ) or " +
-			"( latitude_d = #{latitude_b} and longitude_d = #{longitude_b} ) or " +
-			"( latitude_d = #{latitude_c} and longitude_d = #{longitude_c} ) "
-		)
+		query = "(( latitude_a = #{latitude_b} and longitude_a = #{longitude_b} ) or " +
+						"( latitude_a = #{latitude_c} and longitude_a = #{longitude_c} ) or " +
+						"( latitude_a = #{latitude_d} and longitude_a = #{longitude_d} ) or " +
+						"( latitude_b = #{latitude_a} and longitude_b = #{longitude_a} ) or " +
+						"( latitude_b = #{latitude_c} and longitude_b = #{longitude_c} ) or " +
+						"( latitude_b = #{latitude_d} and longitude_b = #{longitude_d} ) or " +
+						"( latitude_c = #{latitude_a} and longitude_c = #{longitude_a} ) or " +
+						"( latitude_c = #{latitude_b} and longitude_c = #{longitude_b} ) or " +
+						"( latitude_c = #{latitude_d} and longitude_c = #{longitude_d} ) or " +
+						"( latitude_d = #{latitude_a} and longitude_d = #{longitude_a} ) or " +
+						"( latitude_d = #{latitude_b} and longitude_d = #{longitude_b} ) or " +
+						"( latitude_d = #{latitude_c} and longitude_d = #{longitude_c} )) "
+
+		query +=" and city_id = "+city.id.to_s
+
+  	self.class.where(query)
   end
 
 	def restaurants_in_zone(query,tags,limit)
-		restaurants = tags.present? ? self.restaurants.tagged_with(tags) : self.restaurants
-		query[:step1] = restaurants.present?		
-		query[:restaurants] << restaurants.limit(limit) if restaurants.present?
+		restaurant_list = tags.present? ? self.restaurants.tagged_with(tags) : self.restaurants
+		query[:step1] = restaurant_list.present?
+		query[:restaurants] << restaurant_list.take(limit) if restaurant_list.present?
 		query[:restaurants].flatten!
 		query
 	end
@@ -204,25 +210,25 @@ class LocationIndex < ActiveRecord::Base
 			tags.present? ? near_by_location_index.restaurants.tagged_with(tags) :
 											near_by_location_index.restaurants
 		}
-		restuarnants = near_by.map(&near_by_restaurants)
-		query[:step2] = restaurants.present?		
-		query[:restaurants] << restaurants.limit(limit) if restaurants.present?
+		restaurant_list = near_by.map(&near_by_restaurants)
+		query[:step2] = restaurant_list.present?		
+		query[:restaurants] << restaurant_list.take(limit) if restaurant_list.present?
 		query[:restaurants].flatten!
 		query
 	end
 
 	def restaurants_in_city_with(query,tags,limit)
-		restaurants = self.city.restaurants.tagged_with(tags) if tags.present?
-		query[:step3] = restaurants.present?
-		query[:restaurants] << restaurants.limit(limit) if restaurants.present?
+		restaurant_list = self.city.restaurants.tagged_with(tags) if tags.present?
+		query[:step3] = restaurant_list.present?
+		query[:restaurants] << restaurant_list.take(limit) if restaurant_list.present?
 		query[:restaurants].flatten!
 		query
 	end
 
 	def restaurants_in_city_based_on(query,property,order,limit)
-		restaurants = self.city.restaurants.order(property).limit(limit)
-		query[:step4] = (restaurants.present?)
-		query[:restaurants] << restaurants if restaurants.present?
+		restaurant_list = self.city.restaurants.order(property).take(limit)
+		query[:step4] = (restaurant_list.present?)
+		query[:restaurants] << restaurant_list if restaurant_list.present?
 		query[:restaurants].flatten!
 		query
 	end

@@ -1,8 +1,9 @@
 class City < ActiveRecord::Base
 
 	#Assosiations
-	has_many :restaurants
-	has_many :location_indices
+	has_many :restaurants, :dependent => :destroy
+	has_many :location_indices, :dependent => :destroy
+	has_many :location_index_restaurants, :through => :location_index, :dependent => :destroy
 	
 	def max_latitude
 		bound_by.map(&:first).max
@@ -23,7 +24,7 @@ class City < ActiveRecord::Base
 	def bound_by
 		split_pair = -> pair {
 			pair.split(":")
-					.map(&:to_f)
+				.map(&:to_f)
 		}
 		bounds.split(",").map(&split_pair)
 	end
