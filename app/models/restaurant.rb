@@ -73,11 +73,6 @@ class Restaurant < ActiveRecord::Base
 		[latitude,longitude]
 	end
 
-	def geocode
-		super
-		latitude  ||= nil
-		longitude ||= nil
-		coordinates = "nil,nil" unless city.contains?(latitude,longitude)
-	end
+	
 	
 end

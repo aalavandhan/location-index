@@ -10,6 +10,12 @@ gem 'jbuilder', '~> 1.2'
 gem 'acts_as_taggable'
 gem 'acts-as-taggable-on'
 
+gem 'underscore-rails'
+
+gem 'angularjs-rails'
+gem 'ng-rails-csrf'
+gem 'angular-ui-bootstrap-rails'
+
 group :assets do 
 	gem 'sass-rails', '~> 4.0.0'
 	gem 'uglifier', '>= 1.3.0'
