@@ -1,4 +1,3 @@
-
 source 'https://rubygems.org'
 
 gem 'rails', '4.0.2'
@@ -45,3 +44,7 @@ end
 gem 'zomato'
 gem 'geocoder'
 gem 'debugger'
+
+gem 'awesome_print'
+
+gem 'google-search'

@@ -21,6 +21,9 @@ class LocationIndex < ActiveRecord::Base
 	belongs_to :city
 	has_many :location_index_restaurants
 	has_many :restaurants, :through => :location_index_restaurants
+
+  #Geocoder
+  reverse_geocoded_by :latitude, :longitude, :address => :full_address
   
   #Class Methods
 
@@ -133,6 +136,17 @@ class LocationIndex < ActiveRecord::Base
 
   end
 
+  def self.locate_by_locality(locality, city_id=nil)
+
+  	return nil if locality.nil? or (locality.length < 5)
+  	#Assuming average locality names are greater than 5 chars
+
+  	query = "( full_address like '%#{locality}%')"
+  	query +=" and city_id = "+city_id.to_s if city_id.present?
+
+  	where(query)
+  end
+
   def self.initialize_query
   	@query = { :restaurants => [] ,:errors => [] }
 		@query.merge!( :step1 => false )
@@ -166,6 +180,14 @@ class LocationIndex < ActiveRecord::Base
   	Geocoder::Calculations.geographic_center(to_a)
   end
 
+  def latitude
+  	center.first
+  end
+
+  def longitude
+  	center.last
+  end
+
   #Returns the four coordinates as an array
   def to_a
   	[:a,:b,:c,:d].map do |point|
@@ -194,7 +216,7 @@ class LocationIndex < ActiveRecord::Base
 
 		query +=" and city_id = "+city.id.to_s
 
-  	self.class.where(query)
+  	LocationIndex.where(query)
   end
 
 	def restaurants_in_zone(query,tags,limit)

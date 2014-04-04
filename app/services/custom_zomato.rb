@@ -41,10 +41,12 @@ class CustomZomato
 		return if (!has_city?(city_name)) || @@memory[city_name][:updated]
 		
 		zomato_city = city(city_name)
+
 		save_restaurant = -> restaurant {
 			block.call(restaurant)
 			count = count + 1
 		}
+		
 		restaurants_in_locality = -> locality {
 			locality.restaurants.restaurants.each(&save_restaurant)
 		}

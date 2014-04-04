@@ -44,6 +44,31 @@ class Restaurant < ActiveRecord::Base
 		end
 	end
 
+	def self.native_language_search(query)
+		parsed_query = QueryParser.new(query).parsed_query
+
+		cities = City.where(:name => parsed_query[:cities]) if parsed_query[:cities]
+		localities = LocationIndex.where(:locality => parsed_query[:localities]) if parsed_query[:localities]
+
+		if localities.present?			
+			restaurants = Restaurant.where(:id => LocationIndexRestaurant.where(:location_index_id => localities.pluck(:id)).pluck(:restaurant_id))
+		elsif cities.present?
+			restaurants = Restaurant.where(:city_id => cities.pluck(:id))
+		else
+			restaurants = Restaurant.order(:rating_editor_overall => :desc).limit(50)
+		end
+
+		restaurants = restaurants.tagged_with(parsed_query[:cuisines]) if parsed_query[:cuisines].present?
+
+		query = " 1 < 2 "
+
+		query += " and (rating_editor_overall = #{parsed_query[:rating]}) " if parsed_query[:rating]
+		query += " and (cost_for_two = #{parsed_query[:maximum_cost]}) "    if parsed_query[:maximum_cost]
+		query += " and (has_discount) "    if parsed_query[:has_discount]
+
+		restaurants.where(query)
+	end	
+
 	#Instance Methods
 
 	#Calucates the distance between a [latitude,longitude] and a restaurant in Kilometers.
@@ -72,7 +97,5 @@ class Restaurant < ActiveRecord::Base
 	def coordinate_array
 		[latitude,longitude]
 	end
-
-	
 	
 end

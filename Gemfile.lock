@@ -33,6 +33,7 @@ GEM
     angularjs-rails (1.2.14)
     arel (4.0.1)
     atomic (1.1.14)
+    awesome_print (1.2.0)
     bcrypt-ruby (3.1.2)
     bootstrap-sass (3.0.3.0)
       sass (~> 3.2)
@@ -69,6 +70,8 @@ GEM
       factory_girl (~> 4.3.0)
       railties (>= 3.0.0)
     geocoder (1.1.9)
+    google-search (1.0.3)
+      json
     hike (1.2.3)
     httparty (0.12.0)
       json (~> 1.8)
@@ -182,12 +185,14 @@ DEPENDENCIES
   acts_as_taggable
   angular-ui-bootstrap-rails
   angularjs-rails
+  awesome_print
   bootstrap-sass (~> 3.0.3.0)
   database_cleaner (= 1.0.1)
   debugger
   devise
   factory_girl_rails
   geocoder
+  google-search
   jbuilder (~> 1.2)
   jquery-rails
   letter_opener

@@ -73,6 +73,19 @@ describe LocationIndex do
 			end
 		end
 
+		context "latitude" do
+			it "should return the latitude of geographic center" do
+				@location_index.latitude.should eq(13.5313651885272)
+			end
+		end
+
+		context "longitude" do
+			it "should return the longitude of geographic center" do
+				@location_index.longitude.should eq(80.754694)
+			end
+		end		
+
+
 		context "to_a" do
 			it "should return the four coordinates as an array" do
 				@location_index.to_a.should eq([
@@ -106,6 +119,7 @@ describe LocationIndex do
 			@ranges = [[0.0, 0.02], [0.0, 0.02]]
 			DumpData.sample_data(@new_city)
 			LocationIndex.index(@new_city.id)
+			LocationIndex.first.update(:full_address => "this is adyar")
 		}
 
 		context "#self.index" do
@@ -149,6 +163,23 @@ describe LocationIndex do
 				it "should return nil" do
 					LocationIndex.locate([nil,nil]).should be_nil
 					LocationIndex.locate(nil).should be_nil
+				end
+			end
+		end
+
+		context "#self.locate_by_locality" do
+			context "given a locality name" do
+				it "should return a location_index object in which the locality lies" do
+					LocationIndex.locate_by_locality("adyar").should be_present
+				end				
+				it "should return nil if no such location_index is present" do
+					LocationIndex.locate_by_locality("a").should be_nil
+					LocationIndex.locate_by_locality("testtest").should be_empty
+				end
+			end
+			context "given nil" do
+				it "should return nil" do
+					LocationIndex.locate_by_locality(nil).should be_nil
 				end
 			end
 		end
