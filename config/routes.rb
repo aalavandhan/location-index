@@ -1,17 +1,6 @@
 Zomato::Application.routes.draw do
 
-  #root "home#index"
-
-  # match '/graph/:city_name',
-  #     :to => 'graph#show',
-  #     :via => [:get],
-  #     :as => 'city_graph_show'
-
-  # match '/graph/:city_name/:zone_id',
-  #     :to => 'graph#detail',
-  #     :via => [:get],
-  #     :as => 'city_detail_graph_show'      
-  
+  get '/', to: redirect('/')
   resource :api, :only => [] do
     match '/search/text_query',
         :to  => 'api#text_query',
@@ -28,7 +17,6 @@ Zomato::Application.routes.draw do
 
     resources :access_tokens, :only => [:create], :on => :collection
   end
-
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
