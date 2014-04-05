@@ -7,7 +7,9 @@
       $scope.find = find;	
     };
     function find(){
-      Restaurant.textQuery({query:$scope.query})
+      Restaurant.doQuery({query:$scope.query}).then(function(response){
+        
+      });
     }
     defineScope();    
 	}]);

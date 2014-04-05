@@ -6,7 +6,7 @@
    	 'ngRoute'
    ]);
 
-   app.config(['$routeProvider',function($routeProvider){
+   app.config(['$routeProvider','$httpProvider',function($routeProvider,$httpProvider){
 		  $routeProvider
 		    .when('/home',{
 		    	templateUrl: 'views/home.html',
@@ -14,7 +14,8 @@
 		    })
 		    .otherwise({
 		      redirectTo: '/home'
-		    })
-	  }]);
+		  });
+
+    }]);  
 
 }());

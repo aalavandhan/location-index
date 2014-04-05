@@ -1,1 +1,1 @@
-angular.module("rtRestaurant",["ngResource"]);
+angular.module("rtRestaurant",["ngResource","rtBase"]);

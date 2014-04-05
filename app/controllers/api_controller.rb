@@ -1,5 +1,5 @@
 class ApiController < ApplicationController
-	before_filter :authorize!
+	#before_filter :authorize!
 
 	def text_query
 		@restaurants = Restaurant.native_language_search(query_from_params)
