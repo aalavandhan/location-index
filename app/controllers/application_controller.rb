@@ -5,10 +5,17 @@ class ApplicationController < ActionController::API
 
 private
 
+  def authorize!
+    access_token = params[:access_token]
+    unless access_token.present? and !AccessToken.find_by_token(access_token).try(:invalid?)
+      render :json => { :success => 0, :errors => ["This reqeuest is Unauthorized"] }
+    end
+  end
+
   def respond_with_CRUD_json_response(object,errors=nil)
     
+    errors ||= []
     errors = ["You are not authorized to access this resource"] if object.nil?
-    errors = []                                                 if object == true
 
     errors_present  = object.present? ? object.errors.present? : errors.present?
     error_messages  = object.present? ? object.errors.full_messages : errors
@@ -27,5 +34,32 @@ private
 
     render :json => resp
   end  
+
+  def respond_with_CRUD_json_response_for_collection(collection,options=nil,errors=nil)
+
+    errors ||= []
+
+    errors << ["You are not authorized to access this resource"]   if collection.nil?
+    errors << ["There were no results for your query at the time"] if collection.empty?
+
+    failure = errors.present?
+
+    #collection.class.to_s.split("::").last.split("_").last.underscore.pluralize
+    collection_name = !failure ? "restaurants" : nil
+    
+    resp = {
+              :success      => (failure ? 0 : 1),
+              :api_response => true,
+              :data         => {
+                                "#{collection_name}" => failure ? nil : collection
+                               }
+           }
+           
+    resp.merge!(options)               if options.present?
+    resp.merge!({ :errors => errors }) if errors.present?
+
+    render :json => resp
+  end  
+
 
 end

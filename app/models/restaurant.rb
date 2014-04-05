@@ -45,6 +45,8 @@ class Restaurant < ActiveRecord::Base
 	end
 
 	def self.native_language_search(query)
+		return if query.nil? or query.empty?
+
 		parsed_query = QueryParser.new(query).parsed_query
 
 		cities = City.where(:name => parsed_query[:cities]) if parsed_query[:cities]

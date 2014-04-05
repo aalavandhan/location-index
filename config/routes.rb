@@ -12,7 +12,6 @@ Zomato::Application.routes.draw do
   #     :via => [:get],
   #     :as => 'city_detail_graph_show'      
   
-
   resources :api, :only => [] do
     get  'text_query',:on => :collection
     get  'location_query',:on => :collection
