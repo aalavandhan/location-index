@@ -149,6 +149,7 @@ class LocationIndex < ActiveRecord::Base
 
   def self.initialize_query
   	@query = { :restaurants => [] ,:errors => [] }
+  	@query.merge!( :step0 => false )
 		@query.merge!( :step1 => false )
 		@query.merge!( :step2 => false )
 		@query.merge!( :step3 => false )
@@ -159,6 +160,7 @@ class LocationIndex < ActiveRecord::Base
 	def self.fastest_nearest_search(coordinates,tags=nil,type=:complete,property=:rating_editor_overall,order=:desc,limit=10)
 		initialize_query
 		index = locate(coordinates)
+		return @query.update(:step0 => true) if index.nil?
 		@query = index.restaurants_in_zone(@query,tags,limit)
 		@query = index.restaurants_in_near_by_zones(@query,tags,limit)
 		return @query if ( type == :instant || @query[:restaurants].count > limit )
