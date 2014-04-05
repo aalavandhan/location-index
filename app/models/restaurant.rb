@@ -63,7 +63,7 @@ class Restaurant < ActiveRecord::Base
 		query = " 1 < 2 "
 
 		query += " and (rating_editor_overall = #{parsed_query[:rating]}) " if parsed_query[:rating]
-		query += " and (cost_for_two = #{parsed_query[:maximum_cost]}) "    if parsed_query[:maximum_cost]
+		query += " and (cost_for_two <= #{parsed_query[:maximum_cost]}) "    if parsed_query[:maximum_cost]
 		query += " and (has_discount) "    if parsed_query[:has_discount]
 
 		restaurants.where(query)
