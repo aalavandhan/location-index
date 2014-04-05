@@ -10,6 +10,14 @@ describe AccessToken do
 
   end
 
+  describe "#max_use_count" do
+
+    it "should return the time in seconds the token is valid for" do
+      AccessToken.max_use_count.should eq(1000)
+    end
+
+  end  
+
   describe "#expire" do
 
   	let(:access_token){ FactoryGirl.create(:access_token) }
@@ -43,6 +51,16 @@ describe AccessToken do
   			access_token.should_not be_valid_now
   		end
   	end
+
+    context "when used_count is more than the maximum" do
+      let(:access_token){ FactoryGirl.create(:access_token) }
+      before(:each){
+        AccessToken.stub(:max_use_count).and_return(-1)
+      }
+      it "should return false" do
+        access_token.should_not be_valid_now
+      end
+    end
 
   	context "when access_token is valid_now" do
   		let(:access_token){ FactoryGirl.create(:access_token) }

@@ -11,13 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140405020037) do
+ActiveRecord::Schema.define(version: 20140405051822) do
 
   create_table "access_tokens", force: true do |t|
     t.string   "token"
     t.boolean  "expired",    default: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "used_count", default: 0
   end
 
   create_table "cities", force: true do |t|

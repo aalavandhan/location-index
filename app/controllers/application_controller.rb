@@ -8,7 +8,7 @@ private
   def authorize!
     access_token = params[:access_token]
     unless access_token.present? and !AccessToken.find_by_token(access_token).try(:invalid?)
-      render :json => { :success => 0, :errors => ["This reqeuest is Unauthorized"] }
+      render :json => { :success => 0, :errors => ["Your access_token is invalid"] }
     end
   end
 
