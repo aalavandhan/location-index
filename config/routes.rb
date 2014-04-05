@@ -19,7 +19,7 @@ Zomato::Application.routes.draw do
     get  'explore',:on => :collection
   end
 
-  resources :access_tokens
+  resources :access_tokens, :only => [:create]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
