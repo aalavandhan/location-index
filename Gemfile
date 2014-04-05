@@ -26,7 +26,6 @@ group :test do
 	gem 'shoulda-matchers'
 	gem 'vcr', '2.4.0'
 	gem 'webmock', '1.9.1'
-	gem 'factory_girl_rails'
   gem 'database_cleaner', '1.0.1'
   gem "spork-rails"
 end
@@ -48,3 +47,5 @@ gem 'debugger'
 gem 'awesome_print'
 
 gem 'google-search'
+
+gem 'rails-api'

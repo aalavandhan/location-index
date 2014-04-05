@@ -27,5 +27,6 @@ module Zomato
       g.helper_specs false
     end
 
+    config.api_only = true
   end
 end
