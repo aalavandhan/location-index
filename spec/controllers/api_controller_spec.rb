@@ -13,7 +13,6 @@ describe ApiController do
 				get "explore"
 				resp = JSON.parse(response.body)
 				resp['success'].should eq(0)
-				resp['data'].should_not be_present
 			end
 		end
 
@@ -50,7 +49,6 @@ describe ApiController do
 				get "location_query"
 				resp = JSON.parse(response.body)
 				resp['success'].should eq(0)
-				resp['data'].should_not be_present
 			end
 		end
 
@@ -81,7 +79,6 @@ describe ApiController do
 				get "text_query"
 				resp = JSON.parse(response.body)
 				resp['success'].should eq(0)
-				resp['data'].should_not be_present
 			end
 		end
 
@@ -99,5 +96,50 @@ describe ApiController do
 			end
 		end		
 	end
+
+	describe "POST 'tweet'" do
+		before(:all){
+			Restaurant.delete_all
+			FactoryGirl.create(:restaurant)
+		}
+
+		context "invalid access token" do
+			it "should return a json with success 0" do
+				post "tweet"
+				resp = JSON.parse(response.body)
+				resp['success'].should eq(0)
+			end
+		end
+
+		context "valid access token" do
+			before(:each){
+				class Client
+					def update(text)
+						"This #{text} is tweeted"
+					end
+				end
+				TweetResponder.any_instance.stub(:respond).and_return("Tweet Text")
+				TwitterWrapper.any_instance.stub(:client).and_return(Client.new)
+			}
+			context "when coordinates and cuisines are sent" do
+				it "should create a response and tweet to the user" do
+					post "tweet", :admin_access_token => ENV['ADMIN_ACCESS_TOKEN'], :username => "@nithinkrishh", :coordinates => "", :cuisines => ""
+					assigns(:response).should eq("This Tweet Text is tweeted")
+					resp = JSON.parse(response.body)
+					resp['success'].should eq(1)
+				end
+			end
+
+			context "when a query is sent" do
+				it "should create a response and tweet to the user" do
+					post "tweet", :admin_access_token => ENV['ADMIN_ACCESS_TOKEN'], :username => "@nithinkrishh", :query => ""
+					assigns(:response).should eq("This Tweet Text is tweeted")
+					resp = JSON.parse(response.body)
+					resp['success'].should eq(1)
+				end
+			end
+
+		end
+	end	
 
 end

@@ -15,6 +15,11 @@ Zomato::Application.routes.draw do
         :via => [:get],
         :on  => :collection
 
+    match '/bot/tweet',
+        :to  => 'api#tweet',
+        :via => [:post],
+        :on  => :collection
+
     resources :access_tokens, :only => [:create], :on => :collection
   end
   # The priority is based upon order of creation: first created -> highest priority.

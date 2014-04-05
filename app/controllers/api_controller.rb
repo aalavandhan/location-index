@@ -1,5 +1,7 @@
 class ApiController < ApplicationController
-	#before_filter :authorize!
+
+	#before_filter :authorize!, :except => [:tweet]
+	before_filter :authorize_admin!, :only => [:tweet]
 
 	def text_query
 		@restaurants = Restaurant.native_language_search(query_from_params)
@@ -17,6 +19,13 @@ class ApiController < ApplicationController
 		respond_with_CRUD_json_response_for_collection(@restaurants)
 	end
 
+	def tweet
+		responder = TweetResponder.new(username_params,query_from_params,coordinates_from_params,cuisines_from_params)
+		twitter = TwitterWrapper.new
+		@response = twitter.client.update(responder.respond)
+		respond_with_CRUD_json_response(true)
+	end
+
 private
 	def coordinates_from_params
 		params[:coordinates].split(",") if params[:coordinates]
@@ -28,6 +37,10 @@ private
 
 	def query_from_params
 		params[:query]
-	end	
+	end
+
+	def username_params
+		params[:username]
+	end
 
 end

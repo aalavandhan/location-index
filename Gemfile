@@ -49,3 +49,7 @@ gem 'awesome_print'
 gem 'google-search'
 
 gem 'rails-api'
+
+gem 'twitter'
+
+gem 'figaro'
