@@ -22,11 +22,11 @@ class TweetResponder
 	def respond
 
 		if no_matches?
-			no_match_query_response_message 
-		elsif text_query?
-			text_query_response_message.sample
+			no_match_query_response_message
 		elsif location_query?
 			location_query_resonse_message
+		elsif text_query?
+			text_query_response_message.sample
 		else
 			error_query_response_message
 		end
@@ -47,7 +47,7 @@ class TweetResponder
 
 private
 	def text_query_response_message
-		["Hey #{@username}, Checkout try out #{@restaurant.name} in #{@restaurant.address}"]
+		["Hey #{@username}, Checkout #{@restaurant.name} in #{@restaurant.address}"]
 	end
 
 	def location_query_resonse_message

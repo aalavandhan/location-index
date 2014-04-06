@@ -1,0 +1,33 @@
+<h2 class="text-success">Query Successful</h2>
+<p>
+  <strong>Query Time</strong>: <span data-ng-bind="response.query_time"></span>
+</p>
+<p>
+  <strong>User location</strong>: <span data-ng-bind="response['coordinates']"></span>
+</p>
+<p>
+  <strong>Closest restaurant</strong>: <span data-ng-bind="response['closest'].name"></span>
+</p>
+<p>
+  <strong>Distance</strong>: <span data-ng-bind="response['closest_distance']"></span> Kms
+</p>
+<p>
+  <strong>Hits</strong>: <span data-ng-bind="Restaurant.count()"></span>
+</p>
+<ol data-ng-show="locationQuery">
+  <li>
+    {{ response['step0'] ? "City Found" : "City Not Found" }}
+  </li>
+  <li>
+    {{ response['step1'] ? "Restaurants found in the zone" : "No restaurants found in the zone" }}
+  </li>
+  <li>
+    {{ response['step2'] ? "Restaurants found in nearby zones" : "No restaurants found in nearby zones" }}
+  </li>
+  <li>
+    {{ response['step3'] ? "Restaurants found in city" : "No restaurants found in city" }}
+  </li>
+  <li>
+    {{ response['step4'] ? "Limiting and ordering response" : "No restaurants found" }}
+  </li>
+</ol>

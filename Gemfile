@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 gem 'rails', '4.0.2'
-gem 'devise'
+
 gem 'bootstrap-sass', '~> 3.0.3.0'
 gem 'jquery-rails'
 gem 'turbolinks'
@@ -38,11 +38,16 @@ group :development do
 	gem 'rails_layout'
 	gem 'letter_opener'
 	gem 'sqlite3'
+	gem 'debugger'
+end
+
+group :production do
+	gem 'pg'
+	gem 'rails_12factor'
 end
 
 gem 'zomato'
 gem 'geocoder'
-gem 'debugger'
 
 gem 'awesome_print'
 

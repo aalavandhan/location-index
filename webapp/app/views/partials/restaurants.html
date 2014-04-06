@@ -7,10 +7,15 @@
     </center>
   </div>
 
+  <div class="row title" data-ng-show="!Restaurant.hasErrors() && dirty">
+    <center><h1>Restaurants that match your query</h1></center>
+  </div>
+
   <div>
 
-    <div class="row" data-ng-hide="Restaurant.hasErrors()">
-      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+    <div class="row" data-ng-show="!Restaurant.hasErrors() && dirty">
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4" class="restaurants">
+        <div data-ng-include="'views/partials/stats.html'"></div>
       </div>
       <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" >
         <div data-ng-include="'views/partials/restaurant.html'" 

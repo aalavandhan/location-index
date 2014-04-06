@@ -1,1 +1,1 @@
-angular.module("rtBase",["rtBase.services"]);
+angular.module("rtBase",["rtBase.services", "ui.slider"]);

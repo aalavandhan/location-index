@@ -69,7 +69,7 @@ class Restaurant < ActiveRecord::Base
 		query += " and (has_discount) "    if parsed_query[:has_discount]
 
 		restaurants.where(query)
-	end	
+	end
 
 	#Instance Methods
 

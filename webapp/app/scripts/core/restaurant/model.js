@@ -12,21 +12,8 @@
 
         var deferred = $q.defer()
 
-        restaurantFetcher.fetch(type,params).then(function(response){
-          _class.loadCollection(response.data.restaurants)
-          _class.emptyErrors()
+        return restaurantFetcher.fetch(type,params);
 
-          deferred.resolve(response,params)
-
-        },function(errors){
-          _class.emptyCollection()
-          _class.loadErrors(errors)
-
-          deferred.reject(errors)
-
-        })
-
-        return deferred.promise;
       } 
 
       _class.loadCollection = function(restaurants){
@@ -49,9 +36,13 @@
         return !_.isEmpty( this.errors )
       }
 
+      _class.count = function(){
+        return (_class.collection) ? _class.collection.length : 0
+      }
+
       return Restaurant
 
     }
   ])
 
-}())
+}());

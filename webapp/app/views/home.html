@@ -3,7 +3,13 @@
     <div class="row">
       <div class="col-md-8 col-md-offset-2 col-xs-12">
         <div class="jumbotron transparent center-align color-white emphasis">
-          <h1>Find Restaurants Near You</h1>
+          <h2>Find Restaurants Near You</h2>
+          <input class="form-control transparent" 
+                 placeholder="Optional tags (eg) - Italian, North Indian" 
+                 data-ng-model="cuisines" />
+          <br />
+          <div ui-slider min="0" max="100" ng-model="limit" class="ui-slider"></div>
+          <center><small data-ng-bind="limit" class="limit"></small></center>
           <hr />
           <center>
             <input type="button" class="btn btn-info btn-lg" value="Now!" data-ng-click="find()"
@@ -14,5 +20,5 @@
     </div>
   </div>
 </div>
-
+  
 <div data-ng-include="'views/partials/restaurants.html'">

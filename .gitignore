@@ -19,5 +19,6 @@
 
 /webapp/node_modules/
 /webapp/app/bower_components/
+/webapp/.tmp/
 
-/public/
+/public/.htaccess

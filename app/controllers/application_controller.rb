@@ -1,4 +1,4 @@
-class ApplicationController < ActionController::API
+class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   #protect_from_forgery with: :exception
@@ -61,10 +61,16 @@ private
                                }
            }
            
-    resp.merge!(options)               if options.present?
-    resp.merge!({ :errors => errors }) if errors.present?
+    resp.merge!(options)                        if options.present?
+    resp.merge!({ :errors => errors })          if errors.present?
+
+    end_timer!
+    resp.merge!({ :query_time => @query_time }) if @query_time.present?
 
     render :json => resp
   end
 
+  def end_timer!
+    @query_time = Time.now - @start_time
+  end
 end
