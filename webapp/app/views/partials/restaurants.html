@@ -1,0 +1,24 @@
+<div class="container restaurants-container" id="restaurants-list">
+  <div class="row" data-ng-show="Restaurant.hasErrors() && dirty">
+    <center>
+      <h1 class="text-danger" data-ng-bind="Restaurant.errors"></h1>
+      <hr/>
+      <a class="link" data-ng-click="scrollToTop()">Back to the top</a>
+    </center>
+  </div>
+
+  <div>
+
+    <div class="row" data-ng-hide="Restaurant.hasErrors()">
+      <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+      </div>
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8" >
+        <div data-ng-include="'views/partials/restaurant.html'" 
+             data-ng-repeat="restaurant in Restaurant.collection"
+             class="restaurants"></div>
+      </div>
+    </div>
+
+  </div>
+
+</div>

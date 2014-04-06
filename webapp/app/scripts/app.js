@@ -12,6 +12,10 @@
 		    	templateUrl: 'views/home.html',
 		    	controller: 'rtHome.MainController'
 		    })
+		    .when('/search',{
+		    	templateUrl: 'views/search.html',
+		    	controller: 'rtSearch.MainController'
+		    })
 		    .otherwise({
 		      redirectTo: '/home'
 		  });

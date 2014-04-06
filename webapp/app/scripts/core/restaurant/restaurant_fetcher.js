@@ -9,7 +9,7 @@
 
           var deferred = $q.defer(),
           baseUrl = "/api/search/";
-
+          
           $http({method: 'GET', url: baseUrl + queryType, params: params })
           
             .success(function(data){

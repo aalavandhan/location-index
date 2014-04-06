@@ -11,6 +11,8 @@
       				navigator.geolocation.getCurrentPosition(function(position){
                 var coordinateString = [position.coords.latitude, position.coords.longitude].join(",")
                 deferred.resolve(coordinateString)
+              },function(){
+                deferred.reject()  
               })
       			}else{
       				deferred.reject()

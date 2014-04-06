@@ -8,47 +8,45 @@
 
       _class.collection = []
 
-      _class.executeLocationQuery = function(coordinates,cuisines){
+      _class.executeQuery = function(type,params){
 
-        var deferred = $q.defer(),
-        params = { coordinates: coordinates, cuisines: cuisines };
+        var deferred = $q.defer()
 
-        // shift to location query after testing
-        restaurantFetcher.fetch("explore",params).then(function(response){
+        restaurantFetcher.fetch(type,params).then(function(response){
           _class.loadCollection(response.data.restaurants)
           _class.emptyErrors()
 
-          deferred.resolve(response,coordinates,cuisines)
+          deferred.resolve(response,params)
 
         },function(errors){
           _class.emptyCollection()
           _class.loadErrors(errors)
 
-          deferred.reject(errors,coordinates,cuisines)
+          deferred.reject(errors)
 
         })
 
         return deferred.promise;
-      }
+      } 
 
       _class.loadCollection = function(restaurants){
-          _class.collection = restaurants
+          this.collection = restaurants
       }
 
       _class.emptyCollection = function(){
-          _class.collection = []
+          this.collection = []
       }
 
       _class.loadErrors = function(errors){
-        _class.errors = errors
+        this.errors = errors
       }
 
       _class.emptyErrors = function(){
-        _class.errors = []
+        this.errors = []
       }      
 
       _class.hasErrors = function(){
-        return !_.isEmpty( _class.errors )
+        return !_.isEmpty( this.errors )
       }
 
       return Restaurant
