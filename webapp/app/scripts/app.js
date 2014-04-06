@@ -1,6 +1,6 @@
 (function(){
   'use strict';
-   var app = angular.module('rt', ['rtExplore',
+   var app = angular.module('rt', [
    	 'rtHome',
    	 'rtSearch',
    	 'ngRoute'

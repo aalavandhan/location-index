@@ -69,7 +69,7 @@ class Restaurant < ActiveRecord::Base
 		query += " and (has_discount) "    if parsed_query[:has_discount]
 
 		restaurants.where(query)
-	end	
+	end
 
 	#Instance Methods
 
@@ -77,7 +77,7 @@ class Restaurant < ActiveRecord::Base
 	#(eg) Geocoder::Calculations.distance_between([47.858205,2.294359], [40.748433,-73.985655])
 	#returns distance in miles
 	def distance_from(coordinate_array)
-	 	super * Constant.miles_per_kilo_meter
+	 	(super || Float::INFINITY) * Constant.miles_per_kilo_meter
 	end
 
 	#Returns a list of restaurants which are within the specified radius

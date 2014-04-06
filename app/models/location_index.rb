@@ -51,7 +51,7 @@ class LocationIndex < ActiveRecord::Base
   	city = City.find(city_id)
   	return if not city.present?
 
-  	city.location_indices.map(&:location_index_restaurants).flatten.map(&:delete)
+  	LocationIndexRestaurant.where(:location_index_id => city.location_indices.pluck(:id)).delete_all
 
   	city.restaurants.each do |restaurant|
   		index = locate(restaurant.coordinate_array,city.id)
@@ -70,7 +70,7 @@ class LocationIndex < ActiveRecord::Base
   	return if not city.present?
 
   	#Remove previous indices for this city
-  	city.location_indices.map(&:delete)
+  	city.location_indices.delete_all
 
   	range_of_latitudes,range_of_longitudes = self.zone_dimensions_for(city.id)
 
@@ -147,8 +147,9 @@ class LocationIndex < ActiveRecord::Base
   	where(query)
   end
 
-  def self.initialize_query
+  def self.initialize_query_with(coordinates)
   	@query = { :restaurants => [] ,:errors => [] }
+  	@query.merge!( :coordinates => coordinates )
   	@query.merge!( :step0 => false )
 		@query.merge!( :step1 => false )
 		@query.merge!( :step2 => false )
@@ -158,12 +159,12 @@ class LocationIndex < ActiveRecord::Base
   end
 
 	def self.fastest_nearest_search(coordinates,tags=nil,type=:complete,property=:rating_editor_overall,order=:desc,limit=10)
-		initialize_query
+		initialize_query_with coordinates
 		index = locate(coordinates)
-		return @query.update(:step0 => true) if index.nil?
+		index.nil? ? (return @query.update(:step0 => false)) : @query.update(:step0 => true)
 		@query = index.restaurants_in_zone(@query,tags,limit)
 		@query = index.restaurants_in_near_by_zones(@query,tags,limit)
-		return @query if ( type == :instant || @query[:restaurants].count > limit )
+		return @query if ( type == :instant or @query[:restaurants].count > limit )
 		@query = index.restaurants_in_city_with(@query,tags,limit) unless @query[:restaurants].present?
 		return @query if @query[:restaurants].present?
 		@query = index.restaurants_in_city_based_on(@query,property,order,limit) unless @query[:restaurants].present?
@@ -235,22 +236,25 @@ class LocationIndex < ActiveRecord::Base
 											near_by_location_index.restaurants
 		}
 		restaurant_list = near_by.map(&near_by_restaurants)
-		query[:step2] = restaurant_list.present?		
-		query[:restaurants] << restaurant_list.take(limit) if restaurant_list.present?
+		count = query[:restaurants].flatten.count
+		query[:step2] = restaurant_list.present?
+		query[:restaurants] << restaurant_list.flatten.take(limit - count) if restaurant_list.present?
 		query[:restaurants].flatten!
 		query
 	end
 
 	def restaurants_in_city_with(query,tags,limit)
 		restaurant_list = self.city.restaurants.tagged_with(tags) if tags.present?
+		count = query[:restaurants].flatten.count
 		query[:step3] = restaurant_list.present?
-		query[:restaurants] << restaurant_list.take(limit) if restaurant_list.present?
+		query[:restaurants] << restaurant_list.take(limit - count) if restaurant_list.present?
 		query[:restaurants].flatten!
 		query
 	end
 
 	def restaurants_in_city_based_on(query,property,order,limit)
-		restaurant_list = self.city.restaurants.order(property).take(limit)
+		count = query[:restaurants].flatten.count
+		restaurant_list = self.city.restaurants.order(property => order).take(limit - count)
 		query[:step4] = (restaurant_list.present?)
 		query[:restaurants] << restaurant_list if restaurant_list.present?
 		query[:restaurants].flatten!

@@ -292,14 +292,8 @@ module.exports = function (grunt) {
             '.htaccess',
             '*.html',
             'views/{,*/}*.html',
-            'images/{,*/}*.{webp}',
             'fonts/*'
           ]
-        }, {
-          expand: true,
-          cwd: '.tmp/images',
-          dest: '<%= yeoman.dist %>/images',
-          src: ['generated/*']
         }]
       },
       styles: {
@@ -307,7 +301,13 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
-      }
+      },
+      images: {
+        expand: true,
+        cwd: '<%= yeoman.app %>/images/',
+        dest: '<%= yeoman.dist %>/app/images',
+        src: '{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+      }      
     },
 
     // Run some tasks in parallel to speed up the build process
@@ -399,6 +399,7 @@ module.exports = function (grunt) {
     'concat',
     'ngmin',
     'copy:dist',
+    'copy:images',
     'cdnify',
     'cssmin',
     'uglify',
