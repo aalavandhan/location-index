@@ -53,7 +53,7 @@ gem 'awesome_print'
 
 gem 'google-search'
 
-gem 'rails-api'
+#gem 'rails-api'
 
 gem 'twitter'
 
