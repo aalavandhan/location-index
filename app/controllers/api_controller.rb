@@ -1,7 +1,7 @@
 class ApiController < ApplicationController
 
 	#before_filter :authorize!, :except => [:tweet]
-	before_filter :authorize_admin!, :only => [:tweet]
+	#before_filter :authorize_admin!, :only => [:tweet]
 
 	before_filter :start_timer
 

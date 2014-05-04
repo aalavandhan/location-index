@@ -1,6 +1,6 @@
 class TweetResponder
 	def initialize(username,query=nil,coordinates=[],cuisines=[])
-		@url = "http://google.com"
+		@url = "http://quiet-basin-8512.herokuapp.com"
 
 		@username = username
 		@query = query
@@ -14,7 +14,7 @@ class TweetResponder
 			@restaurants = LocationIndex.fastest_nearest_search(coordinates,cuisines,:instant)[:restaurants]
 			@restaurant = @restaurants.sample
 		else
-			@restaurants = []
+			@restaurants = Restaurant.all
 			@restaurant = nil
 		end
 	end

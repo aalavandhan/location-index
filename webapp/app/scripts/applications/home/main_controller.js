@@ -42,19 +42,17 @@
                 $scope.Restaurant.emptyErrors()
                 $scope.xhrState.complete()
                 $scope.response = _.omit(response, "data","errors")
-                scrollToBottom()
               },function(errors){
                 $scope.Restaurant.emptyCollection()
                 $scope.Restaurant.loadErrors(errors)
                 $scope.xhrState.error()
-                scrollToBottom()
               })
       }
 
       function find(){
         $scope.dirty = true
         $scope.xhrState.initiate()
-
+        scrollToBottom()
         if($scope.state == 'auto'){
           locator.get().then(getResults, showLocationError)
         }else{

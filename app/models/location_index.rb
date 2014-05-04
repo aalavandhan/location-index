@@ -31,6 +31,7 @@ class LocationIndex < ActiveRecord::Base
 		self.create_zones_for city_id
 		self.populate city_id
 		self.update_restaurant_count city_id  	
+		self.get_full_address
   end
 
   #Update Restaurant Count for all indices in a city
@@ -90,6 +91,21 @@ class LocationIndex < ActiveRecord::Base
 				)
 			end
 		end
+	end
+
+	def self.get_full_address city_id
+		city = City.find(city_id)
+  	return if not city.present?
+
+  	city.location_indices.each do |location_index|
+  		result = location_index.reverse_geocode
+  		if result.present?
+  			address_words = location_index.full_address.split(",").reverse
+  			locality = (address_words[2].strip != city.name) ? address_words[2] : address_words[3] if address_words.count > 3
+  			location_index.locality =  locality.strip
+  		end
+  		location_index.save
+  	end
 	end
 
 	#Retrives the maximum and minimum latitudes and longitudes for zone computation

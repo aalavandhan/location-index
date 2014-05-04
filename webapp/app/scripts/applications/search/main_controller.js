@@ -30,19 +30,18 @@
 	    function find(){
 	    	$scope.dirty = true
 	      $scope.xhrState.initiate()
-
+	      scrollToBottom()
     	  Restaurant.executeQuery("text_query",{ query: $scope.query })
 					.then(function(response){
 						$scope.Restaurant.loadCollection(response.data.restaurants)
           	$scope.Restaurant.emptyErrors()
 	          $scope.xhrState.complete()
 	          $scope.response = _.omit(response, "data","errors")
-	          scrollToBottom()
+	          
 	        },function(errors){
 	        	$scope.Restaurant.emptyCollection()
           	$scope.Restaurant.loadErrors(errors)
 	          $scope.xhrState.error()
-	          scrollToBottom()
 	        })
 	    }
 

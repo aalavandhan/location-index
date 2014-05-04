@@ -71,6 +71,6 @@ private
   end
 
   def end_timer!
-    @query_time = Time.now - @start_time
+    @query_time = Time.now - @start_time if (@start_time)
   end
 end
