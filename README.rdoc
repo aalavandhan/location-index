@@ -30,6 +30,7 @@ A four step search algorithm was implemented using the spatial indexes.
 The search algorithm takes in a latitude, longitude and additional tags like "Italian", "North Indian" etc. which are used as additional filters.
 
 1)  It maps the latitude and longitude to the spatial zone to which it belongs to, and returns a list of restaurants in that zone.
+
 2)  It then looks for restaurants in adjacent spatial zones, and returns a list of restaurants in each of the nearby zone.
 
 If step one and step two return restaurants whose count is more than a defined critical count, the algorithm stops else it continues.
