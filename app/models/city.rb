@@ -30,8 +30,8 @@ class City < ActiveRecord::Base
 	end
 
 	def contains? latitude, longitude
-		latitude.between?(bound_by.map(&:first).first,bound_by.map(&:first).last) and
-				longitude.between?(bound_by.map(&:last).first,bound_by.map(&:last).last)
+		latitude.between?(bound_by.first.first,bound_by.last.first) and
+				longitude.between?(bound_by.first.last,bound_by.last.last)
 	end
 
 end
