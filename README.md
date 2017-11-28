@@ -1,4 +1,4 @@
-##Setup
+## Setup
 
 ```
 # Seed you database with restaurant data.
@@ -15,13 +15,13 @@ LocationIndex.fastest_nearest_search([13.20,80.20])
 # This query will return all the restaurants around the given latitude and longitude.
 ```
 
-##Idea and Implementation
+## Idea and Implementation
 
 Fastest nearest neighbor search algorithm was implemented over a sample set of all the restaurants in Chennai. Restaurant information was incrementally gathered from zomato.com's public API. This API provides basic information of about 800 restaurants in Chennai. Information like, cuisines served, address, rating (etc). Once this was obtained, the Google GEO Coding public API was used to map each restaurant address into a latitude and longitude metric. The Rails-Angular application modularizes this process through a defined data dump job which is to be run before the development environment is setup.
 As per the theory of the fastest nearest neighbor search, the search area was mapped into smaller spatial regions, and restaurants were indexed based on their proximity to the zones. 
 A four step search algorithm was implemented using the spatial indexes.
 
-###Location Search Algorithm 
+### Location Search Algorithm 
 
 The search algorithm takes in a latitude, longitude and additional tags like "Italian", "North Indian" etc. which are used as additional filters.
 
@@ -41,7 +41,7 @@ The application uses the phone's location via the HTML5 geo-location API and fet
 
 As an enhancement, a free text search algorithm was also implemented which responds to queries like "Find me an Italian restaurant in Adyar" or "Get me all the restaurants near Guindy".
 
-###Free text search Algorithm 
+### Free text search Algorithm 
 
 The text query is split into words. The algorithm loops through each word and compares it to a set of locality names, and cuisines name and compute a SQL query.Example: "Find me an Italian restaurant in Adyar" would result in a query like -> `select * from restaurants where cuisines in ['Adyar'] and locality in ['Guindy']`
 
@@ -51,7 +51,7 @@ The twitter bot listens to Twitter's live stream and responds with custom messag
 
 The twitter server which runs independently form the ruby app, communicates queries to the app via a well defined Restful interface.
 
-It's to be noted that the entire system was built and architected using the TDD philosophy and is completely spec covered.
+It's to be noted that the entire system was built and architected using the TDD and is completely spec covered.
 
 
 
