@@ -1,23 +1,19 @@
 == Setup
 
-Seed you database with restaurant data.
-
+```
+# Seed you database with restaurant data.
 Restaurant.import_from_zomato("Chennai")
 
-Update the bounds of the city.
-
+# Update the bounds of the city.
 City.find_by_name("Chennai").update(:bounds => "12.7847499:80.070000,13.2032924:80.29606948")
 
-Index your database.
-
+# Index your database.
 LocationIndex.index(1).
 
-
-Perform fastest nearest search queries.
-
+# Perform fastest nearest search queries.
 LocationIndex.fastest_nearest_search([13.20,80.20])
-
-This query will return all the restaurants around the given latitude and longitude.
+# This query will return all the restaurants around the given latitude and longitude.
+```
 
 == Idea and Implementation
 
